@@ -1,6 +1,11 @@
 # Promise +
 Promise with callback in each step.
 
+### Install
+```
+npm i tvrcgo/promise
+```
+
 ### Content
 - `promise()`
 - `then()`
@@ -20,7 +25,7 @@ promise(function(done, reject){
 	console.log('next 2', result); // result=2
 
 }).catch(function(err){
-	console.error(err);;
+	console.error(err);
 
 })
 ```
