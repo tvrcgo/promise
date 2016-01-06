@@ -1,0 +1,22 @@
+{
+  "name": "promise",
+  "version": "1.0.0",
+  "description": "promise with callback in each step.",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd test && mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tvrcgo/promise.git"
+  },
+  "keywords": [
+    "flow"
+  ],
+  "author": "tvrcgo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tvrcgo/promise/issues"
+  },
+  "homepage": "https://github.com/tvrcgo/promise#readme"
+}

@@ -1,41 +1,41 @@
+'use strict';
+
 /**
- * 异步流程控制 Flow
- * @author tvrcgo
+ * promise
+ * @param  {function} fn
  */
-function flow(fn){
-
-    if ( !(this instanceof flow) ) {
-        return new flow(fn);
+function promise(fn){
+    if (!(this instanceof promise)) {
+        return new promise(fn);
     }
-
-    this._flow = [];
-    this._run = false;
-
-    this._flow.push(fn);
-
-    this._pass = function(ret){
-        this._last = ret;
-        if ( this._flow.length ) {
-            this._flow.shift().call(this, this._last, this._pass);
-        }
-        else {
-            this._run = false;
-        }
-    }.bind(this);
-
+    this.promise = new Promise(function(resolve, reject){
+        fn && fn(resolve, reject);
+    });
 };
 
 /**
- * 加新任务到流程
+ * then
+ * @param  {Function} fn
+ * @return {object}      [promise]
  */
-flow.prototype.next = function(fn){
-    this._flow.push(fn);
-    if (!this._run) {
-        this._run = true;
-        this._flow.shift().call(this, this._last, this._pass);
-    }
+promise.prototype.then = function(fn){
+    return promise(function(resolve, reject){
+        this.promise.then(function(result){
+            fn && fn(result, resolve, reject);
+        }).catch(function(err) {
+            reject(err);
+        });
+    }.bind(this));
+}
+
+/**
+ * catch
+ * @param  {Function} fn [description]
+ * @return {object}      [promise]
+ */
+promise.prototype.catch = function(fn) {
+    this.promise.catch(fn);
     return this;
-};
+}
 
-
-module.exports = flow;
+module.exports = promise;
